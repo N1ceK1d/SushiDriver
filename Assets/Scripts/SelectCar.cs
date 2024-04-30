@@ -22,18 +22,15 @@ public class SelectCar : MonoBehaviour
 
     private void Start()
     {
-        ShowAllCars();
-    }
-
-    private void DisplayCars()
-    {
         if(carType == SelectCarType.userCar)
         {
-            ShowAllCars();
+            ShowUserCars();
         } else 
         {
-            ShowUserCars();
+            ShowAllCars();
         }
+        // ShowAllCars();
+
     }
 
     public void ShowNextCar() 
@@ -41,9 +38,10 @@ public class SelectCar : MonoBehaviour
         if(carIndex < allCars.Count() - 1)
         {
             carIndex++;
+            ShowCurrentCar();
         }
         Debug.Log(carIndex);
-        ShowCurrentCar();
+        
     }
 
     public void ShowPrevCar()
@@ -51,31 +49,34 @@ public class SelectCar : MonoBehaviour
         if(carIndex > 0 )
         {
             carIndex--;
+            ShowCurrentCar();
         }
         Debug.Log(carIndex);
-        ShowCurrentCar();
+        
     }
 
     public void ShowAllCars()
     {
-        Debug.Log("All Cars");
+        // Debug.Log("All Cars");
         carListManager.DisplayAllCars(OnGetAllCarsCallback);
+        ShowCurrentCar();
     }
 
     public void ShowUserCars()
     {
-        Debug.Log("User Cars");
+        // Debug.Log("User Cars");
         carListManager.DisplayPlayerCars("1", OnGetAllCarsCallback);
+        ShowCurrentCar();
     }
 
     private void OnGetAllCarsCallback(List<Car> carsList)
     {
         if (carsList != null)
         {
-            foreach (Car car in carsList)
-            {
-                Debug.Log("All Car: " + car.name);
-            }
+            // foreach (Car car in carsList)
+            // {
+            //     Debug.Log("All Car: " + car.name);
+            // }
             allCars.AddRange(carsList);
         }
         else

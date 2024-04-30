@@ -1287,7 +1287,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 836173219}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1192426345}
+        m_TargetAssemblyTypeName: SelectCar, Assembly-CSharp
+        m_MethodName: ShowNextCar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &836173219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1990,6 +2002,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   carListManager: {fileID: 545738536}
   carType: 1
+  carSpawn: {fileID: 1405108406}
 --- !u!114 &1192426346
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2084,7 +2097,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1247813830}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1192426345}
+        m_TargetAssemblyTypeName: SelectCar, Assembly-CSharp
+        m_MethodName: ShowPrevCar
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1247813830
 MonoBehaviour:
   m_ObjectHideFlags: 0
