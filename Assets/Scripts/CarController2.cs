@@ -48,8 +48,8 @@ public class CarController2 : MonoBehaviour
         // Перемещение
         transform.position += MoveForce * Time.deltaTime;
 
-        WheelRotate(FR);
-        WheelRotate(FL);
+        // WheelRotate(FR);
+        // WheelRotate(FL);
     }
 
     public void GetDeviceRotation ()

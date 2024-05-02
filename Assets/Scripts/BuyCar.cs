@@ -7,15 +7,11 @@ public class BuyCar : MonoBehaviour
 {
     private string postURL = "http://sushidriver/php/buyCar.php";
 
-    // int playerId = PlayerPrefs.GetInt("playerId");
-    // int playerScore = PlayerPrefs.GetInt("playerScore");
-    
-
     // Метод для отправки данных на сервер
     public void SendPurchaseData()
     {
-        int playerId = 1;
-        int playerScore = 15000;
+        int playerId = PlayerPrefs.GetInt("user_id");
+        int playerScore = PlayerPrefs.GetInt("Scrote");
         int car_price = PlayerPrefs.GetInt("current_car_price");
         int car_id = PlayerPrefs.GetInt("current_car_id");
         Debug.Log("Цена: " + car_price.ToString() + " - Очки: " + playerScore.ToString());

@@ -65,7 +65,7 @@ public class SelectCar : MonoBehaviour
     {
         // Debug.Log("User Cars");
         carType = SelectCarType.userCar;
-        carListManager.DisplayPlayerCars("1", OnGetAllCarsCallback);
+        carListManager.DisplayPlayerCars(PlayerPrefs.GetInt("user_id").ToString(), OnGetAllCarsCallback);
         ShowCurrentCar();
     }
 
@@ -114,7 +114,7 @@ public class SelectCar : MonoBehaviour
             car_price.text = "Купленно";
         } else 
         {
-            if(currentCar.price > 15000)
+            if(currentCar.price > PlayerPrefs.GetInt("Scrote"))
             {
                 car_price.color = Color.red;
             } else 

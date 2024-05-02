@@ -11,7 +11,7 @@ public class SceneController : MonoBehaviour
 
     private void Awake() {
         // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        // Screen.orientation = ScreenOrientation.LandscapeLeft;
         if(pause != null)
         {
             pause.SetActive(false);
