@@ -54,6 +54,23 @@ public class SceneController : MonoBehaviour
             int.TryParse(Regex.Match(score.text, @"\d+").Value, out resultString);
 
             PlayerPrefs.SetInt("Scrote", PlayerPrefs.GetInt("Scrote") + resultString);
+            WWWForm regForm = new WWWForm();
+            regForm.AddField("user_id", PlayerPrefs.GetInt("user_id"));
+		    regForm.AddField("score", resultString);
+
+		    WWW www = new WWW("http://sushidriver/php/updateScore.php", regForm);
+		    StartCoroutine(UpdateFunc(www));
         }
     }
+
+    private IEnumerator UpdateFunc(WWW www)
+	{
+		yield return www;
+        Debug.Log(www.text);
+		if(www.error != null)
+		{
+			Debug.Log("Ошибка: " + www.error);
+			yield break;
+		}
+	}
 }
