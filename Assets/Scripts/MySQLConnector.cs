@@ -15,11 +15,18 @@ public class MySQLConnector : MonoBehaviour
     public InputField confirmPassword;
     public Text errorText;
     private string formattedNumber;
+	public GameObject registerWindow;
     
     [Header("Login Data")]
     public InputField login_mail;
     public InputField login_password;
     public Text loginError;
+	public GameObject loginWindow;
+
+	[Header("MainMenu")]
+	public GameObject mainMenuWindow;
+	public SelectCar car;
+
 
     private bool FormatPhoneNumber()
     {
@@ -93,6 +100,8 @@ public class MySQLConnector : MonoBehaviour
 		else 
 		{
 			GetUserData(www);
+			registerWindow.SetActive(false);
+			mainMenuWindow.SetActive(true);
 		}
 	}
 
@@ -106,10 +115,11 @@ public class MySQLConnector : MonoBehaviour
 		{
 			PlayerPrefs.SetInt("user_id", loaded.userData.id);
 			PlayerPrefs.SetString("FirstName", loaded.userData.Name);
+			PlayerPrefs.SetString("Email", loaded.userData.Email);
 			PlayerPrefs.SetString("SecondName", loaded.userData.SecondName);
 			PlayerPrefs.SetInt("Scrote", loaded.userData.Score);
 			PlayerPrefs.SetString("CarColor", loaded.userData.CarColor);
-            
+            car.ShowUserCars();
 		}
 	}
 
@@ -123,6 +133,8 @@ public class MySQLConnector : MonoBehaviour
 		} else 
 		{
 			GetUserData(www);
+			loginWindow.SetActive(false);
+			mainMenuWindow.SetActive(true);
 		}
 
 		if(www.error != null)
