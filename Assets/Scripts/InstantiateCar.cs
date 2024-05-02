@@ -14,7 +14,5 @@ public class InstantiateCar : MonoBehaviour
         player.AddComponent<CarController2>();
         player.GetComponent<CarController2>().Traction = 0.1f;
         camera.GetComponent<CameraController>().player = player.transform;
-        player.GetComponent<CarController2>().FR = player.GetComponent<Transform>().Find("WheelMeshes").Find("FR").gameObject;
-        player.GetComponent<CarController2>().FL = player.GetComponent<Transform>().Find("WheelMeshes").Find("FL").gameObject;
     }
 }

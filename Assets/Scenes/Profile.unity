@@ -4526,8 +4526,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1192426343}
-        m_TargetAssemblyTypeName: SceneController, Assembly-CSharp
+      - m_Target: {fileID: 1192426346}
+        m_TargetAssemblyTypeName: MainMenuController, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.Text.RegularExpressions;
 
 public class SceneController : MonoBehaviour
 {
@@ -46,5 +47,13 @@ public class SceneController : MonoBehaviour
     public void ToProfile()
     {
         SceneManager.LoadScene("Profile");
+        if(PlayerPrefs.HasKey("user_id"))
+        {
+            Text score = GameObject.Find("Score").GetComponent<Text>();
+            int resultString;
+            int.TryParse(Regex.Match(score.text, @"\d+").Value, out resultString);
+
+            PlayerPrefs.SetInt("Scrote", PlayerPrefs.GetInt("Scrote") + resultString);
+        }
     }
 }

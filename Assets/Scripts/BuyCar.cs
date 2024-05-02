@@ -22,6 +22,19 @@ public class BuyCar : MonoBehaviour
             data.Add("carId", car_id);
 
             StartCoroutine(PostData(data));
+
+            PlayerPrefs.SetInt("Scrote", playerScore - car_price);
+            
+            if(PlayerPrefs.HasKey("user_id"))
+            {
+                int totalScore = PlayerPrefs.GetInt("Scrote");
+                WWWForm regForm = new WWWForm();
+                regForm.AddField("user_id", PlayerPrefs.GetInt("user_id"));
+		        regForm.AddField("score", totalScore);
+
+		        WWW www = new WWW("http://sushidriver/php/updateScore.php", regForm);
+		        StartCoroutine(UpdateFunc(www));
+            }
         } else 
         {
             Debug.Log("Недостаточно средств!");
@@ -55,4 +68,15 @@ public class BuyCar : MonoBehaviour
             }
         }
     }
+
+    private IEnumerator UpdateFunc(WWW www)
+	{
+		yield return www;
+        Debug.Log(www.text);
+		if(www.error != null)
+		{
+			Debug.Log("Ошибка: " + www.error);
+			yield break;
+		}
+	}
 }

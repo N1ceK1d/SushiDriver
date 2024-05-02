@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CarController2 : MonoBehaviour
 {
-
     // Настройки
     public float MoveSpeed = 15; // Скорость движения
     public float MaxSpeed = 15; // Максимальная скорость
@@ -18,10 +17,9 @@ public class CarController2 : MonoBehaviour
     public TrailRenderer[] trails;
     private bool emiting;
 
-    private Vector2 touch_kord;
-
-    public GameObject FR;
-    public GameObject FL; 
+    private float driftScore = 0; // Счётчик очков за дрифт
+    public GameObject driftScoreText;
+    private int totalScore = 0;
 
     void FixedUpdate()
     {
@@ -48,30 +46,27 @@ public class CarController2 : MonoBehaviour
         // Перемещение
         transform.position += MoveForce * Time.deltaTime;
 
-        // WheelRotate(FR);
-        // WheelRotate(FL);
-    }
+        if(PlayerPrefs.HasKey("user_id"))
+        {
+            driftScoreText = GameObject.Find("Score");
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.4f)
+            {
+                // Увеличиваем счётчик очков за дрифт
+                driftScore+=0.05f;
+                totalScore += (int)Mathf.Round(driftScore);
+            }
+            else
+            {
+                // Когда машина не дрифтует, выводим счёт в консоль и сбрасываем его
+                if (driftScore > 0)
+                {
+                    Debug.Log("Очки за дрифт: " + driftScore);
+                    driftScore = 0;
+                }
+            }
+            driftScoreText.GetComponent<Text>().text = "Счёт: " + totalScore.ToString();
+        }
 
-    public void GetDeviceRotation ()
-    {
-        // Получение угла поворота устройства по оси z (в градусах)
-        float xAngle = Input.acceleration.x * Mathf.Rad2Deg;
-
-        // Вывод угла поворота в консоль
-        Debug.Log("Угол поворота по оси x: " + xAngle);
-    }
-
-    public void WheelRotate(GameObject wheel)
-    {
-        // Получение угла поворота устройства по оси z (в радианах)
-        float xAngle = Input.acceleration.x * Mathf.PI / 2;
-        // Ограничение угла поворота колес до максимально 35 градусов
-        xAngle = Mathf.Clamp(xAngle, -Mathf.PI / 4, Mathf.PI / 4);
-
-        // Поворот колес в зависимости от ограниченного угла поворота устройства
-        wheel.transform.localRotation = Quaternion.Euler(0, 0, xAngle * Mathf.Rad2Deg);
-
-        // Вывод угла поворота в консоль
-        Debug.Log("Угол поворота по оси x: " + xAngle);
+        
     }
 }
