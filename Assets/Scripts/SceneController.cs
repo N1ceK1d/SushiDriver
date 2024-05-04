@@ -11,8 +11,6 @@ public class SceneController : MonoBehaviour
     public GameObject pauseButton;
 
     private void Awake() {
-        // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        // Screen.orientation = ScreenOrientation.LandscapeLeft;
         if(pause != null)
         {
             pause.SetActive(false);

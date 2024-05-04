@@ -59,7 +59,6 @@ public class CarController2 : MonoBehaviour
             }
             else
             {
-                // Когда машина не дрифтует, выводим счёт в консоль и сбрасываем его
                 if (driftScore > 0)
                 {
                     driftScore = 0;

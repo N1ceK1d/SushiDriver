@@ -19,15 +19,28 @@ public class SelectCar : MonoBehaviour
     public SelectCarType carType = SelectCarType.userCar;
     private int carIndex = 0;
     public Transform carSpawn;
+    public Text screenName;
 
     public Text car_name;
     public Text car_price;
 
     private void Awake()
     {
-        
-        ShowUserCars();
-        
+        if(PlayerPrefs.HasKey("user_id"))
+        {
+            ShowUserCars();
+        }
+    }
+
+    public void changeScreenName()
+    {
+        if(carType == SelectCarType.userCar)
+        {
+            screenName.text = "Гараж";
+        } else 
+        {
+            screenName.text = "Магазин";
+        }
     }
 
     public void ShowNextCar() 
@@ -63,13 +76,13 @@ public class SelectCar : MonoBehaviour
 
     public void ShowUserCars()
     {
-        // Debug.Log("User Cars");
+        carIndex = 0;
         carType = SelectCarType.userCar;
         carListManager.DisplayPlayerCars(PlayerPrefs.GetInt("user_id").ToString(), OnGetAllCarsCallback);
         ShowCurrentCar();
     }
 
-    private void OnGetAllCarsCallback(List<Car> carsList)
+    public void OnGetAllCarsCallback(List<Car> carsList)
     {
         if (carsList != null)
         {
@@ -94,13 +107,10 @@ public class SelectCar : MonoBehaviour
             return;
         }
         Car currentCar = allCars.ElementAt(carIndex);
-        // carName.text = currentCar.name;
         if(carSpawn.childCount > 0)
         {
             Destroy(carSpawn.GetChild(0).gameObject);
         }
-        // PlayerPrefs.SetString("car_prefab", "Prefabs/" + currentCar.model_path);
-        // PlayerPrefs.Save();
         PlayerPrefs.SetString("current_car_model", currentCar.model_path);
         PlayerPrefs.SetInt("current_car_id", currentCar.id);
         PlayerPrefs.SetInt("current_car_price", currentCar.price);

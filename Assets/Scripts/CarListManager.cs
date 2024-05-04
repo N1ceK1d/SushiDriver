@@ -20,7 +20,7 @@ public class CarListManager : MonoBehaviour
         StartCoroutine(GetPlayerCars(playerId, callback));
     }
 
-    private IEnumerator GetAllCars(Action<List<Car>> callback)
+    public IEnumerator GetAllCars(Action<List<Car>> callback)
     {
         using (UnityWebRequest www = UnityWebRequest.Get(allCarsURL))
         {
@@ -39,7 +39,7 @@ public class CarListManager : MonoBehaviour
         }
     }
 
-    private IEnumerator GetPlayerCars(string playerId, Action<List<Car>> callback)
+    public IEnumerator GetPlayerCars(string playerId, Action<List<Car>> callback)
     {
         string playerCarsURLWithId = playerCarsURL + "?playerId=" + playerId;
 
@@ -61,7 +61,7 @@ public class CarListManager : MonoBehaviour
         }
     }
 
-    private List<Car> ParseCarList(string carsData)
+    public List<Car> ParseCarList(string carsData)
     {
         List<Car> carsList = new List<Car>();
 

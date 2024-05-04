@@ -12,6 +12,8 @@ public class MainMenuController : MonoBehaviour
     public GameObject startGameBtn;
     public Text playerName;
     public Text playerScore;
+    public SelectCar selectCar;
+    
     private void Awake()
     {
         CheckLoggined();
@@ -45,14 +47,13 @@ public class MainMenuController : MonoBehaviour
     }
     public void StartGame()
     {
-        if((PlayerPrefs.HasKey("car_prefab") && PlayerPrefs.GetString("car_prefab") != null) && PlayerPrefs.HasKey("user_id") && PlayerPrefs.GetInt("car_select") == 1)
+        if(PlayerPrefs.HasKey("car_prefab") && PlayerPrefs.GetString("car_prefab") != null)
         {
-            SceneManager.LoadScene("SampleScene");
-        } else 
-        {
-            SceneManager.LoadScene("GuestScene");
+            if(PlayerPrefs.GetInt("car_select") == 1)
+            {
+                SceneManager.LoadScene("SampleScene");
+            }
         }
-        
     }
 
     public void ExitGame()
