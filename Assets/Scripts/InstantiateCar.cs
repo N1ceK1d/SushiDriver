@@ -13,6 +13,7 @@ public class InstantiateCar : MonoBehaviour
         GameObject player = Instantiate(car, player_spawn);
         player.AddComponent<CarController2>();
         player.GetComponent<CarController2>().Traction = 0.1f;
+        player.tag = "Player";
         camera.GetComponent<CameraController>().player = player.transform;
     }
 }

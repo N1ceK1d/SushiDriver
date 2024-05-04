@@ -28,6 +28,7 @@ public class SceneController : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene("SampleScene");
+        Time.timeScale = 1f;
     }
 
     public void Pause()
@@ -45,6 +46,11 @@ public class SceneController : MonoBehaviour
     }
 
     public void ToProfile()
+    {
+        SceneManager.LoadScene("Profile");
+    }
+
+    public void EndGame()
     {
         SceneManager.LoadScene("Profile");
         if(PlayerPrefs.HasKey("user_id"))

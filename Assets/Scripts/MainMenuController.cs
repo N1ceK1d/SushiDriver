@@ -8,6 +8,8 @@ public class MainMenuController : MonoBehaviour
     public GameObject playerData;
     public GameObject loginBtn;
     public GameObject exitBtn;
+    public GameObject garageBtn;
+    public GameObject startGameBtn;
     public Text playerName;
     public Text playerScore;
     private void Awake()
@@ -28,6 +30,8 @@ public class MainMenuController : MonoBehaviour
             playerData.SetActive(true);
             exitBtn.SetActive(true);
             loginBtn.SetActive(false);
+            garageBtn.SetActive(true);
+            startGameBtn.SetActive(true);
             playerName.text = PlayerPrefs.GetString("Email");
             playerScore.text = "Очки: " + PlayerPrefs.GetInt("Scrote").ToString();
         } else 
@@ -35,6 +39,8 @@ public class MainMenuController : MonoBehaviour
             playerData.SetActive(false);
             exitBtn.SetActive(false);
             loginBtn.SetActive(true);
+            garageBtn.SetActive(false);
+            startGameBtn.SetActive(false);
         }
     }
     public void StartGame()

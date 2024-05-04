@@ -20,6 +20,8 @@ public class CarController2 : MonoBehaviour
     private float driftScore = 0; // Счётчик очков за дрифт
     public GameObject driftScoreText;
     private int totalScore = 0;
+    public GameObject gameZone;
+    public int inGameZone = 1;
 
     void FixedUpdate()
     {
@@ -46,10 +48,10 @@ public class CarController2 : MonoBehaviour
         // Перемещение
         transform.position += MoveForce * Time.deltaTime;
 
-        if(PlayerPrefs.HasKey("user_id"))
+        if(PlayerPrefs.HasKey("user_id") && inGameZone == 1)
         {
             driftScoreText = GameObject.Find("Score");
-            if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.4f)
+            if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.4f && Mathf.Abs(Input.GetAxis("Vertical")) > 0)
             {
                 // Увеличиваем счётчик очков за дрифт
                 driftScore+=0.05f;
@@ -60,13 +62,19 @@ public class CarController2 : MonoBehaviour
                 // Когда машина не дрифтует, выводим счёт в консоль и сбрасываем его
                 if (driftScore > 0)
                 {
-                    Debug.Log("Очки за дрифт: " + driftScore);
                     driftScore = 0;
                 }
             }
             driftScoreText.GetComponent<Text>().text = "Счёт: " + totalScore.ToString();
         }
-
-        
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        inGameZone = 1;
+    }
+ 
+    private void OnTriggerExit(Collider other)
+    {
+        inGameZone = 0;
     }
 }

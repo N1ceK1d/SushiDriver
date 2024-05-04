@@ -207,6 +207,4 @@ public class UserData
 	public int Score;
 	public string CarColor;
 	public string Status;
-	public string Metallic;
-	public string Smoothness;
 }

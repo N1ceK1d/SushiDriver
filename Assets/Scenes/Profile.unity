@@ -441,7 +441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &69861361
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4719,7 +4719,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1154349304
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4959,6 +4959,8 @@ MonoBehaviour:
   playerData: {fileID: 1839837188}
   loginBtn: {fileID: 2046607833}
   exitBtn: {fileID: 1382937232}
+  garageBtn: {fileID: 0}
+  startGameBtn: {fileID: 0}
   playerName: {fileID: 871600604}
   playerScore: {fileID: 1032268388}
 --- !u!1 &1198332828
