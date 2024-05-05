@@ -63,7 +63,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: -7727990205272521636, guid: ebd360b726a86de4382ee4da710cea23, type: 3}
-  - {fileID: 7701936454499124359, guid: ebd360b726a86de4382ee4da710cea23, type: 3}
+  - {fileID: 2100000, guid: 47e5dceae1cf06d43b781ceb5c53142f, type: 2}
   - {fileID: -4501844345254283026, guid: ebd360b726a86de4382ee4da710cea23, type: 3}
   - {fileID: -6605286581438609140, guid: ebd360b726a86de4382ee4da710cea23, type: 3}
   - {fileID: -2142268206848620520, guid: ebd360b726a86de4382ee4da710cea23, type: 3}
@@ -122,7 +122,7 @@ GameObject:
   - component: {fileID: 5847484330639200403}
   m_Layer: 0
   m_Name: Toyota AE86
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

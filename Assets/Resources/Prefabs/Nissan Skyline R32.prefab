@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 7525844282513992161}
   - component: {fileID: 2264810841816943457}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -673,7 +673,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: e2fe82ba41b3d3c4d8d2c80c49a99c6d, type: 3}
+  - {fileID: 2100000, guid: 9d3e41c4aa30c974a92c43d7b684a03e, type: 2}
   - {fileID: 2336839302229727711, guid: e2fe82ba41b3d3c4d8d2c80c49a99c6d, type: 3}
   - {fileID: -3241473124614841641, guid: e2fe82ba41b3d3c4d8d2c80c49a99c6d, type: 3}
   - {fileID: 660535416369590717, guid: e2fe82ba41b3d3c4d8d2c80c49a99c6d, type: 3}
@@ -1174,7 +1174,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -876546973899608171, guid: e2fe82ba41b3d3c4d8d2c80c49a99c6d, type: 3}
+  - {fileID: 2100000, guid: 9d3e41c4aa30c974a92c43d7b684a03e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -78,6 +78,15 @@ public class CarListManager : MonoBehaviour
                     car.name = carNode["name"];
                     car.model_path = carNode["model_path"];
                     car.price = carNode["price"].AsInt;
+                    if(carNode["car_color"] != null)
+                    {
+                        car.color = carNode["car_color"];
+                        Debug.Log(carNode["car_color"]);
+                    } else 
+                    {
+                        Debug.Log("#FFFFF");
+                        car.color = "#FFFFFF";
+                    }
                     carsList.Add(car);
                 }
             }
@@ -99,4 +108,5 @@ public class Car
     public string name;
     public string model_path;
     public int price;
+    public string color;
 }

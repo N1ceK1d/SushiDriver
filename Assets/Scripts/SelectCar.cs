@@ -96,10 +96,19 @@ public class SelectCar : MonoBehaviour
         PlayerPrefs.SetString("current_car_model", currentCar.model_path);
         PlayerPrefs.SetInt("current_car_id", currentCar.id);
         PlayerPrefs.SetInt("current_car_price", currentCar.price);
+        PlayerPrefs.SetString("current_car_color", currentCar.color);
         PlayerPrefs.Save();
 
         var prefab = Resources.Load("Prefabs/" + currentCar.model_path) as GameObject;
-        Instantiate(prefab, carSpawn);
+        
+        GameObject newCar = Instantiate(prefab, carSpawn);
+        newCar.tag = "Player";
+
+        Color newCol;
+        ColorUtility.TryParseHtmlString(currentCar.color, out newCol);
+
+        newCar.transform.Find("Body").GetComponent<Renderer>().material.color = newCol;
+        Debug.Log(newCar.transform.Find("Body").GetComponent<Renderer>().material.color);
         car_name.text = currentCar.name;
 
         if(carType == SelectCarType.userCar)

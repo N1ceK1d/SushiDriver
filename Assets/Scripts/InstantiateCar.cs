@@ -14,6 +14,9 @@ public class InstantiateCar : MonoBehaviour
         player.AddComponent<CarController2>();
         player.GetComponent<CarController2>().Traction = 0.1f;
         player.tag = "Player";
+        Color newCol;
+        ColorUtility.TryParseHtmlString(PlayerPrefs.GetString("current_car_color"), out newCol);
+        player.transform.Find("Body").GetComponent<Renderer>().material.color = newCol;
         camera.GetComponent<CameraController>().player = player.transform;
     }
 }
