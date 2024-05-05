@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Data;
 using UnityEngine.UI;
 using System.Linq;
 
@@ -20,7 +19,6 @@ public class SelectCar : MonoBehaviour
     private int carIndex = 0;
     public Transform carSpawn;
     public Text screenName;
-
     public Text car_name;
     public Text car_price;
 
@@ -34,60 +32,46 @@ public class SelectCar : MonoBehaviour
 
     public void changeScreenName()
     {
-        if(carType == SelectCarType.userCar)
-        {
-            screenName.text = "Гараж";
-        } else 
-        {
-            screenName.text = "Магазин";
-        }
+        screenName.text = carType == SelectCarType.userCar ? "Гараж" : "Магазин";
     }
 
     public void ShowNextCar() 
     {
-
-        if(carIndex < allCars.Count() - 1)
+        if(carIndex < allCars.Count - 1)
         {
             carIndex++;
             ShowCurrentCar();
         }
-        Debug.Log(carIndex);
-        
     }
 
     public void ShowPrevCar()
     {
-        if(carIndex > 0 )
+        if(carIndex > 0)
         {
             carIndex--;
             ShowCurrentCar();
         }
-        Debug.Log(carIndex);
-        
     }
 
     public void ShowAllCars()
     {
-        // Debug.Log("All Cars");
         carType = SelectCarType.shopCar;
         carListManager.DisplayAllCars(OnGetAllCarsCallback);
-        ShowCurrentCar();
     }
 
     public void ShowUserCars()
     {
-        carIndex = 0;
         carType = SelectCarType.userCar;
         carListManager.DisplayPlayerCars(PlayerPrefs.GetInt("user_id").ToString(), OnGetAllCarsCallback);
-        ShowCurrentCar();
     }
 
     public void OnGetAllCarsCallback(List<Car> carsList)
     {
         if (carsList != null)
         {
-            allCars.Clear();
-            allCars.AddRange(carsList);
+            allCars = carsList;
+            carIndex = Mathf.Clamp(carIndex, 0, allCars.Count - 1);
+            ShowCurrentCar();
         }
         else
         {
@@ -97,20 +81,18 @@ public class SelectCar : MonoBehaviour
 
     public void ShowCurrentCar()
     {
-        if (allCars == null || carIndex < 0 || carIndex >= allCars.Count())
+        if (allCars == null || allCars.Count == 0 || carIndex < 0 || carIndex >= allCars.Count)
         {
             Debug.Log("No car to display");
-            if(carSpawn.childCount > 0)
-            {
-                Destroy(carSpawn.GetChild(0).gameObject);
-            }
             return;
         }
-        Car currentCar = allCars.ElementAt(carIndex);
+        
         if(carSpawn.childCount > 0)
         {
             Destroy(carSpawn.GetChild(0).gameObject);
         }
+        
+        Car currentCar = allCars.ElementAt(carIndex);
         PlayerPrefs.SetString("current_car_model", currentCar.model_path);
         PlayerPrefs.SetInt("current_car_id", currentCar.id);
         PlayerPrefs.SetInt("current_car_price", currentCar.price);
@@ -119,21 +101,23 @@ public class SelectCar : MonoBehaviour
         var prefab = Resources.Load("Prefabs/" + currentCar.model_path) as GameObject;
         Instantiate(prefab, carSpawn);
         car_name.text = currentCar.name;
+
         if(carType == SelectCarType.userCar)
         {
             car_price.text = "Купленно";
-        } else 
+            car_price.color = Color.white;
+        }
+        else 
         {
             if(currentCar.price > PlayerPrefs.GetInt("Scrote"))
             {
                 car_price.color = Color.red;
-            } else 
+            }
+            else 
             {
                 car_price.color = Color.green;
             }
-
-            car_price.text = (currentCar.price).ToString();
+            car_price.text = currentCar.price.ToString();
         }
-        
     }
 }
