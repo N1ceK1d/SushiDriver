@@ -9,14 +9,13 @@ public class ChangeColor : MonoBehaviour
     private GameObject carBody;
     public GameObject colorPicker;
     public GameObject changeColorBtn;
+    public SelectCar selectCar;
 
     void Start()
     {
-        // Находим дочерний объект "Body" у объекта с тегом "Player"
-        carBody = GameObject.Find("Body");
-        if (carBody == null)
+        if (carBody != null)
         {
-            Debug.LogError("Body GameObject not found under the Player!");
+            carBody = GameObject.Find("Body");
         }
     }
 
@@ -52,6 +51,7 @@ public class ChangeColor : MonoBehaviour
 
         // Отправляем данные на PHP скрипт
         StartCoroutine(SendColorToPHP(form));
+
         colorPicker.SetActive(false);
         changeColorBtn.SetActive(true);
     }
@@ -70,6 +70,7 @@ public class ChangeColor : MonoBehaviour
             else
             {
                 Debug.Log("Color data sent successfully!");
+                selectCar.ShowUserCars();
             }
         }
     }

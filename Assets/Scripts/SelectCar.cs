@@ -103,7 +103,7 @@ public class SelectCar : MonoBehaviour
         
         GameObject newCar = Instantiate(prefab, carSpawn);
         newCar.tag = "Player";
-
+        newCar.GetComponent<Rigidbody>().isKinematic = true;
         Color newCol;
         ColorUtility.TryParseHtmlString(currentCar.color, out newCol);
 
