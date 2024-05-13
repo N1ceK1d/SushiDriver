@@ -56,7 +56,7 @@ public class SelectCar : MonoBehaviour
     public void ShowAllCars()
     {
         carType = SelectCarType.shopCar;
-        carListManager.DisplayAllCars(OnGetAllCarsCallback);
+        carListManager.DisplayAllCars(PlayerPrefs.GetInt("user_id").ToString(), OnGetAllCarsCallback);
     }
 
     public void ShowUserCars()
@@ -79,6 +79,22 @@ public class SelectCar : MonoBehaviour
         }
     }
 
+    public void ShowSelectedCar()
+    {
+        if(carSpawn.childCount > 0)
+        {
+            Destroy(carSpawn.GetChild(0).gameObject);
+        }
+
+        var prefab = Resources.Load("Prefabs/" + PlayerPrefs.GetString("selected_car_model")) as GameObject;
+        GameObject newCar = Instantiate(prefab, carSpawn);
+        newCar.tag = "Player";
+        newCar.GetComponent<Rigidbody>().isKinematic = true;
+        Color newCol;
+        ColorUtility.TryParseHtmlString(PlayerPrefs.GetString("selected_car_color"), out newCol);
+        newCar.transform.Find("Body").GetComponent<Renderer>().material.color = newCol;
+    }
+
     public void ShowCurrentCar()
     {
         if (allCars == null || allCars.Count == 0 || carIndex < 0 || carIndex >= allCars.Count)
@@ -98,7 +114,6 @@ public class SelectCar : MonoBehaviour
         PlayerPrefs.SetInt("current_car_price", currentCar.price);
         PlayerPrefs.SetString("current_car_color", currentCar.color);
         PlayerPrefs.Save();
-
         var prefab = Resources.Load("Prefabs/" + currentCar.model_path) as GameObject;
         
         GameObject newCar = Instantiate(prefab, carSpawn);
@@ -108,7 +123,6 @@ public class SelectCar : MonoBehaviour
         ColorUtility.TryParseHtmlString(currentCar.color, out newCol);
 
         newCar.transform.Find("Body").GetComponent<Renderer>().material.color = newCol;
-        Debug.Log(newCar.transform.Find("Body").GetComponent<Renderer>().material.color);
         car_name.text = currentCar.name;
 
         if(carType == SelectCarType.userCar)

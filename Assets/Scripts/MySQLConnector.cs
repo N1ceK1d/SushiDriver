@@ -46,7 +46,7 @@ public class MySQLConnector : MonoBehaviour
 		}
 		else 
 		{
-			errorText.text = "Поле должно содержать 11 цифр";
+			errorText.text = "Номер должен содержать 11 цифр";
 			return false;
 		}
     }
@@ -64,13 +64,20 @@ public class MySQLConnector : MonoBehaviour
 					regForm.AddField("lastName", lastName.text);
 					regForm.AddField("mail", mail.text);
 					regForm.AddField("phone", formattedNumber);
-					regForm.AddField("password", password.text);
+					regForm.AddField("password", confirmPassword.text);
 
 					WWW www = new WWW("http://sushidriver/php/register.php", regForm);
 					StartCoroutine(RegisterFunc(www));
+
+					Debug.Log(firstName.text);
+					Debug.Log(lastName.text);
+					Debug.Log(mail.text);
+					Debug.Log(formattedNumber);
+					Debug.Log(password.text);
 				}
 			}
 		}
+		
 	}
 
 	public void Login()
@@ -99,6 +106,7 @@ public class MySQLConnector : MonoBehaviour
 		}
 		else 
 		{
+			Debug.Log(www);
 			GetUserData(www);
 			registerWindow.SetActive(false);
 			mainMenuWindow.SetActive(true);

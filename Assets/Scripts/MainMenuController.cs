@@ -12,7 +12,10 @@ public class MainMenuController : MonoBehaviour
     public GameObject startGameBtn;
     public Text playerName;
     public Text playerScore;
+    public Text playerScore2;
     public SelectCar selectCar;
+
+    public Transform carSpawn;
     
     private void Awake()
     {
@@ -36,6 +39,7 @@ public class MainMenuController : MonoBehaviour
             startGameBtn.SetActive(true);
             playerName.text = PlayerPrefs.GetString("Email");
             playerScore.text = "Очки: " + PlayerPrefs.GetInt("Scrote").ToString();
+            playerScore2.text = "Очки: " + PlayerPrefs.GetInt("Scrote").ToString();
         } else 
         {
             playerData.SetActive(false);
@@ -60,6 +64,10 @@ public class MainMenuController : MonoBehaviour
     {
         PlayerPrefs.DeleteAll();
         CheckLoggined();
+        if(carSpawn.childCount > 0)
+        {
+            Destroy(carSpawn.GetChild(0).gameObject);
+        }
         Application.Quit();
     }
 

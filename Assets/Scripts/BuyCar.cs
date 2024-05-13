@@ -2,10 +2,12 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using UnityEngine.UI;
 
 public class BuyCar : MonoBehaviour
 {
     private string postURL = "http://sushidriver/php/buyCar.php";
+    public Text price_car_text;
 
     // Метод для отправки данных на сервер
     public void SendPurchaseData()
@@ -14,12 +16,14 @@ public class BuyCar : MonoBehaviour
         int playerScore = PlayerPrefs.GetInt("Scrote");
         int car_price = PlayerPrefs.GetInt("current_car_price");
         int car_id = PlayerPrefs.GetInt("current_car_id");
-        Debug.Log("Цена: " + car_price.ToString() + " - Очки: " + playerScore.ToString());
+        
         if(playerScore >= car_price)
         {
             Dictionary<string, int> data = new Dictionary<string, int>();
             data.Add("userId", playerId);
             data.Add("carId", car_id);
+
+            Debug.Log(playerId + " - " + car_id);
 
             StartCoroutine(PostData(data));
 
@@ -34,7 +38,9 @@ public class BuyCar : MonoBehaviour
 
 		        WWW www = new WWW("http://sushidriver/php/updateScore.php", regForm);
 		        StartCoroutine(UpdateFunc(www));
+                price_car_text.text = "Куплено";
             }
+            
         } else 
         {
             Debug.Log("Недостаточно средств!");

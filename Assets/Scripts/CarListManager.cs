@@ -10,9 +10,9 @@ public class CarListManager : MonoBehaviour
     private string allCarsURL = "http://sushidriver/php/getCars.php";
     private string playerCarsURL = "http://sushidriver/php/getPlayerCars.php";
 
-    public void DisplayAllCars(Action<List<Car>> callback)
+    public void DisplayAllCars(string playerId, Action<List<Car>> callback)
     {
-        StartCoroutine(GetAllCars(callback));
+        StartCoroutine(GetAllCars(playerId, callback));
     }
 
     public void DisplayPlayerCars(string playerId, Action<List<Car>> callback)
@@ -20,9 +20,9 @@ public class CarListManager : MonoBehaviour
         StartCoroutine(GetPlayerCars(playerId, callback));
     }
 
-    public IEnumerator GetAllCars(Action<List<Car>> callback)
+    public IEnumerator GetAllCars(string playerId, Action<List<Car>> callback)
     {
-        using (UnityWebRequest www = UnityWebRequest.Get(allCarsURL))
+        using (UnityWebRequest www = UnityWebRequest.Get(allCarsURL + "?playerId=" + playerId))
         {
             yield return www.SendWebRequest();
             if (www.result != UnityWebRequest.Result.Success)

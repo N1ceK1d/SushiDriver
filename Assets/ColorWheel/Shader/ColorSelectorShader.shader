@@ -5,7 +5,7 @@
 
 Shader "UI/ColorSelector" {
 	Properties {
-
+		_MainTex ("Texture", 2D) = "white" {}
 	}
 	SubShader {
 		Lighting Off
