@@ -68,7 +68,6 @@ public class MainMenuController : MonoBehaviour
         {
             Destroy(carSpawn.GetChild(0).gameObject);
         }
-        Application.Quit();
     }
 
     public void MainMenu()
